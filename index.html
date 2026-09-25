@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .profile-card { transition: background-color 0.4s ease, transform 0.3s ease, box-shadow 0.3s ease; }
+    </style>
+</head>
+<body>
+
+    <header id="top">
+        <h1>Jasmine Miller</h1>
+        <p>Web Design & Development Portfolio</p>
+        <nav style="margin-top: 15px;">
+            <a href="#top" style="color: #fff; margin: 0 10px; text-decoration: none; font-weight: bold;">Home</a> | 
+            <a href="#goals-heading" style="color: #fff; margin: 0 10px; text-decoration: none; font-weight: bold;">My Goals</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="profile-card">
+            <img src="./media/Jasmine.jpg" alt="Jasmine Miller" class="profile-img">
+            
+            <div class="bio">
+                <h2 id="goals-heading">About Me & My Goals</h2>
+                
+                <h3>My Experience</h3>
+                <p>I am currently still learning things day by day about web design and development. So far, some things that I have learned is Responsive design, Development tools, and HTML/Javascript. </p>
+                
+                <h3>What I Hope to Learn</h3>
+                <p>In this course, I hope to learn how to master layout techniques and responsive design. I also want to get comfortable with frameworks.</p>
+                
+                <div class="expanded-goals" style="display: none; padding-top: 5px;">
+                    <p><em>Additionally, I plan on practicing modular DOM interactions, version control repository workflows, and cleaning up scripts to build strong interactive foundations!</em></p>
+                </div>
+                <button id="read-more-btn" style="background: #333; color: #fff; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; font-size: 0.85em; margin-bottom: 15px;">Read More ↓</button>
+                
+                <h3>Future Aspirations</h3>
+                <p>In the future, I plan to utilize my knowledge in Web design and Devolpment to launch a technology career such as a Front-end Web Developer. </p>
+                
+                <div style="margin-top: 20px;">
+                    <button id="greet-user-btn" style="background: #007acc; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                        Click to Connect!
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Jasmine Miller.</p>
+    </footer>
+
+    <script src="https://jquery.com" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    
+    <script>
+        $(document).ready(function() {
+
+            $('#greet-user-btn').click(function() {
+                const hour = new Date().getHours();
+                let interactiveMessage = "Welcome!";
+                
+                if (hour < 12) {
+                    interactiveMessage = "Good morning! Thanks for stopping by early to review my Front-end Developer portfolio portfolio assets.";
+                } else if (hour < 18) {
+                    interactiveMessage = "Good afternoon! Welcome to my web space. Thank you for tracking my development journey.";
+                } else {
+                    interactiveMessage = "Good evening! Thank you for checking out my interactive code assignments tonight.";
+                }
+                alert(interactiveMessage);
+            });
+
+
+            $('.profile-card').hover(
+                function() {
+                    $(this).css({
+                        'transform': 'translateY(-5px)',
+                        'box-shadow': '0 12px 24px rgba(0,0,0,0.15)'
+                    });
+                }, 
+                function() {
+                    $(this).css({
+                        'transform': 'translateY(0)',
+                        'box-shadow': 'none'
+                    });
+                }
+            );
+
+
+            $('#read-more-btn').click(function() {
+                const $extraText = $('.expanded-goals');
+                const $btn = $(this);
+                
+                $extraText.slideToggle(300, function() {
+                    if ($extraText.is(':visible')) {
+                        $btn.text('Read Less ↑');
+                    } else {
+                        $btn.text('Read More ↓');
+                    }
+                });
+            });
+
+           
+          const systemHour = new Date().getHours();
+            if (systemHour < 6 || systemHour >= 19) {
+                $('body').css({
+                    'background-color': '#121212',
+                    'color': '#f0f0f0'
+                });
+                $('.profile-card').css({
+                    'background-color': '#1e1e1e',
+                    'border': '1px solid #333'
+                });
+                $('header, footer').css('background-color', '#1a1a1a');
+            }
+
+            $('nav a').click(function(e) {
+                if (this.hash !== "") {
+                    e.preventDefault();
+                    const sectionHash = this.hash;
+
+                    $('html, body').animate({
+                        scrollTop: $(sectionHash).offset().top
+                    }, 600);
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
